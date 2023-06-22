@@ -1,13 +1,13 @@
-package com.kwiatkowski.Modulith;
+package com.kwiatkowsky.customer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ModulithApplicationTests {
+class CustomerApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }

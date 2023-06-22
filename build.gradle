@@ -7,6 +7,10 @@ plugins {
 group = 'com.kwiatkowski'
 version = '0.0.1-SNAPSHOT'
 
+ext {
+	springBootVersion = '3.1.1' // keep in sync with boot plugin
+}
+
 java {
 	sourceCompatibility = '17'
 }
@@ -16,10 +20,40 @@ repositories {
 }
 
 dependencies {
+	implementation project(':product')
+	implementation project(':customer')
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+subprojects {
+	group = rootProject.group
+	version = rootProject.version
+
+	apply plugin: 'java'
+	apply plugin: 'io.spring.dependency-management'
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+		}
+	}
+
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	test {
+		useJUnitPlatform()
+	}
 }
